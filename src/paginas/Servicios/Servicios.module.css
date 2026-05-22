@@ -1,0 +1,45 @@
+/* src/paginas/Servicios/Servicios.module.css */
+
+.contenedor {
+  width: 100%;
+}
+
+.encabezadoSeccion {
+  margin-bottom: 32px;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 20px;
+}
+
+.titulo {
+  font-family: var(--font-titles);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0 0 8px 0;
+  letter-spacing: -0.02em;
+}
+
+.bajada {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 1200px;
+}
+
+.precarga {
+  background-color: var(--bg-surface);
+  padding: 40px;
+  border-radius: 4px;
+  text-align: center;
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  border: 1px dashed #cbd5e1;
+}
+
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}

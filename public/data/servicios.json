@@ -1,0 +1,203 @@
+[
+  {
+    "id": 1,
+    "nombre": "Impermeabilización Integral y Trabajos en Altura",
+    "categoria": "Albañilería y Estructuras",
+    "descripcion_corta": "Aislamiento hidráulico de azoteas, sellado de fisuras en medianeras y pozos de aire comunes.",
+    "descripcion_larga": "Servicio técnico orientado al tratamiento de filtraciones críticas y humedades en la envolvente edilicia del consorcio. Abarca el retiro de membranas degradadas en azoteas de uso común, aplicación de mantas geotextiles con base poliuretánica, e hidrolavado y sellado de grietas estructurales en frentes, contrafrentes y pozos de aire (aire y luz) mediante operarios en silleta con certificación de ART y elementos de protección homologados.",
+    "imagen": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=400",
+    "alcance": "Consorcios y Particulares",
+    "requiere_inspeccion": true,
+    "campos_especificos": [
+      {
+        "name": "superficie_estimada",
+        "label": "Superficie aproximada a intervenir (m²)",
+        "type": "number",
+        "placeholder": "Ej: 120"
+      },
+      {
+        "name": "sector_afectado",
+        "label": "Sector del consorcio que presenta la filtración",
+        "type": "select",
+        "opciones": [
+          "Terraza de Uso Común / Azotea",
+          "Muro Medianero Externo",
+          "Pozo de Aire y Luz",
+          "Balcones del Frente / Contrafrente"
+        ]
+      },
+      {
+        "name": "necesita_silletistas",
+        "label": "¿El área requiere acceso por soga en altura (silletistas)?",
+        "type": "select",
+        "opciones": ["Sí", "No", "A evaluar en la inspección"]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "nombre": "Plomería e Instalaciones Sanitarias",
+    "categoria": "Plomería",
+    "descripcion_corta": "Reparación de columnas principales, pluviales, cloacales y confección de informes por siniestros linderos.",
+    "descripcion_larga": "Diagnóstico y reparación de redes hidráulicas colectivas y derivaciones privadas. Especialistas en el reemplazo de tramos de columnas montantes de distribución de agua mediante termofusión, reparación de bajadas pluviales y cloacales de fundición, y detección no destructiva de pérdidas ocultas. Se proveen informes periciales detallados para deslindar responsabilidades por daños materiales entre unidades funcionales linderas.",
+    "imagen": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=400",
+    "alcance": "Consorcios y Particulares",
+    "requiere_inspeccion": true,
+    "campos_especificos": [
+      {
+        "name": "origen_fuga",
+        "label": "Naturaleza o componente presunto del siniestro",
+        "type": "select",
+        "opciones": [
+          "Columnas de Distribución",
+          "Desagües / Pluviales / Canaletas del Edificio",
+          "Cañería Interna de Unidad Funcional",
+          "Tanques de agua"
+        ]
+      },
+      {
+        "name": "requiere_informe_legal",
+        "label": "¿Requiere informe técnico de exploración para presentar al Consejo o Propietarios?",
+        "type": "select",
+        "opciones": [
+          "Sí, se necesita informe para el Consorcio",
+          "No, solo se requiere cotizar la reparación"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "nombre": "Mantenimiento Eléctrico y Puesta a Tierra en Consorcios",
+    "categoria": "Electricidad",
+    "descripcion_corta": "Adecuación de salas de medidores, tableros de bombas, iluminación de emergencia y Protocolo Res. 900/15.",
+    "descripcion_larga": "Adecuación técnica de instalaciones eléctricas de potencia bajo normativas AEA en espacios comunes. Contempla la reconfiguración y automatización de tableros de comando para bombas de agua (tanques y cisternas), mantenimiento preventivo en salas de medidores principales, tendido de líneas montantes y la ejecución del Protocolo de Puesta a Tierra obligatoria (Resolución 900/15 SRT) con instrumental certificado.",
+    "imagen": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=400",
+    "alcance": "Consorcios y Particulares",
+    "requiere_inspeccion": false,
+    "campos_especificos": [
+      {
+        "name": "tipo_requerimiento_electrico",
+        "label": "Tipo de intervención solicitada",
+        "type": "select",
+        "opciones": [
+          "Medición y Certificación de Puesta a Tierra (Res. 900/15)",
+          "Refacción del Tablero Central / de Bombas",
+          "Urgencia por Cortocircuito / Corte de luz en unidad funcional",
+          "Modernización de Iluminación y Luces de Emergencia"
+        ]
+      },
+      {
+        "name": "cantidad_bombas",
+        "label": "Cantidad de motores / bombas de agua operativos en el edificio",
+        "type": "number",
+        "placeholder": "Ej: 2"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "nombre": "Gas, Calefacción y Pruebas de Hermeticidad",
+    "categoria": "Gas y Calefacción",
+    "descripcion_corta": "Solución de fugas, adecuación de redes de gas, certificación y puesta a punto de calderas y trámites ante distribuidoras.",
+    "descripcion_larga": "Intervenciones integrales para el restablecimiento y adecuación normativa de redes de gas en consorcios. Diagnóstico rápido ante fugas en reguladores, pruebas de hermeticidad con manómetro en cañerías comunes, ventilaciones reglamentarias de salas de calderas y adecuación de nichos de medidores. Gestión completa de trámites, planos y presentaciones ante la empresa distribuidora de gas para la rehabilitación segura del servicio.",
+    "imagen": "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&q=80&w=400",
+    "alcance": "Consorcios y Particulares",
+    "requiere_inspeccion": true,
+    "campos_especificos": [
+      {
+        "name": "estado_servicio_gas",
+        "label": "Situación actual del suministro en el consorcio",
+        "type": "select",
+        "opciones": [
+          "Servicio Cortado Preventivamente por la Distribuidora",
+          "Fuga de Gas detectada (Servicio activo con olor a gas)",
+          "Adecuación / Renovación de cañerías",
+          "Inspección Preventiva de Rutina"
+        ]
+      },
+      {
+        "name": "artefactos_comunes",
+        "label": "Cantidad de equipos centrales con conexión de gas (Calderas / Termotanques centrales)",
+        "type": "number",
+        "placeholder": "Ej: 1"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "nombre": "Pintura de Interiores y Mantenimiento de Áreas Comunes",
+    "categoria": "Pintura y Acabados",
+    "descripcion_corta": "Pintado de halls de acceso, palieres, pasillos de escaleras, cocheras y unidades funcionales.",
+    "descripcion_larga": "Servicio de acondicionamiento estético y protección de superficies interiores en áreas de alto tránsito. Comprende el enduido y lijado de muros, aplicación de fijadores hidrorrepelentes, tratamiento de manchas de hollín o humedad previas, y pintado con látex lavable de primera calidad en halls de entrada, palieres, pasillos de escaleras de incendio, demarcación vial en subsuelos de cocheras y unidades funcionales afectadas por humedad.",
+    "imagen": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&q=80&w=400",
+    "alcance": "Consorcios y Particulares",
+    "requiere_inspeccion": true,
+    "campos_especificos": [
+      {
+        "name": "sectores_a_pintar",
+        "label": "Sectores interiores principales a intervenir",
+        "type": "select",
+        "opciones": [
+          "Hall de Entrada y Accesos Comunes",
+          "Palieres y Pasillos de Circulación",
+          "Caja de Escaleras Completa",
+          "Cocheras / Bauleras",
+          "Unidades Funcionales"
+        ]
+      },
+      {
+        "name": "cantidad_pisos",
+        "label": "Cantidad de plantas que posee el edificio / ambientes a pintar",
+        "type": "number",
+        "placeholder": "Ej: 8"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "nombre": "Herrería, Cercos y Cerramientos Metálicos",
+    "categoria": "Herrería y Estructuras Metálicas",
+    "descripcion_corta": "Reparación de portones de cochera, barandas de balcones, cercos de seguridad y escaleras de servicio.",
+    "descripcion_larga": "Mantenimiento, reparación y soldadura de componentes metálicos de protección y acceso en el consorcio. Abarca el refuerzo estructural de portones de cochera automatizados, soldadura técnica de barandas de seguridad en balcones deteriorados por corrosión, instalación de cercos perimetrales de seguridad, y fabricación o reparación de escaleras de servicio para salas de tanques y azoteas.",
+    "imagen": "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=400",
+    "alcance": "Consorcios y Particulares",
+    "requiere_inspeccion": true,
+    "campos_especificos": [
+      {
+        "name": "tipo_estructura_metalica",
+        "label": "Elemento metálico que requiere intervención",
+        "type": "select",
+        "opciones": [
+          "Portón de Cochera",
+          "Barandas de Balcones / Pasamanos",
+          "Cercos Perimetrales / Rejas de Seguridad de Fachada",
+          "Marcos de ventanas y puertas metálicas"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "nombre": "Carpintería Integral y Aberturas",
+    "categoria": "Carpintería y Cerramientos",
+    "descripcion_corta": "Mantenimiento de aberturas de madera, puertas de acceso principal, marcos y pasamanos.",
+    "descripcion_larga": "Acondicionamiento y reparación de carpinterías de madera en accesos y vías comunes del edificio. Incluye el cepillado de puertas de entrada macizas desalineadas por el asentamiento, reparación de cerraduras y pivotes de uso intensivo, restauración de pasamanos de madera en pasillos y sustitución o refuerzo de marcos de aberturas dañadas por humedad en sótanos o salas técnicas del consorcio.",
+    "imagen": "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=400",
+    "alcance": "Consorcios y Particulares",
+    "requiere_inspeccion": true,
+    "campos_especificos": [
+      {
+        "name": "abertura_a_reparar",
+        "label": "Ubicación del elemento a intervenir",
+        "type": "select",
+        "opciones": [
+          "Puerta de Entrada Principal del Edificio",
+          "Marcos y Puertas de Salas Técnicas (Sótanos/Azoteas)",
+          "Pasamanos y Molduras de Madera en Espacios Comunes",
+          "Aberturas / Muebles Interiores de Unidades Funcionales"
+        ]
+      }
+    ]
+  }
+]

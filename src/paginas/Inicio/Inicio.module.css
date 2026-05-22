@@ -1,0 +1,309 @@
+/* src/paginas/Inicio/Inicio.module.css */
+
+.contenedorHome {
+  width: 100%;
+}
+
+/* 1. SECCIÓN HÉROE */
+.heroe {
+  position: relative;
+  width: 100%;
+  min-height: 450px;
+  background-image: url("https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=1200");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.capaFiltro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(27, 77, 62, 0.85);
+  z-index: 1;
+}
+
+.contenidoHeroe {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  text-align: center;
+  color: var(--bg-surface);
+}
+
+.tituloPrincipal {
+  font-family: var(--font-titles);
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.bajadaHeroe {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0 0 32px 0;
+  color: #f1f5f9;
+}
+
+.bloqueBotones {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.botonCtaPrincipal {
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  background-color: var(--bg-surface);
+  color: var(--color-primary);
+  padding: 14px 24px;
+  border-radius: 4px;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.botonCtaPrincipal:hover {
+  background-color: #f1f5f9;
+}
+
+.botonCtaSecundario {
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  background-color: transparent;
+  color: var(--bg-surface);
+  border: 2px solid var(--bg-surface);
+  padding: 12px 22px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.botonCtaSecundario:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 2. BARRA DE VALIDACIÓN */
+.barraValidacion {
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid #e2e8f0;
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.itemValidacion {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.iconoValidacion {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.tituloValidacion {
+  font-family: var(--font-titles);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 4px 0;
+}
+
+.textoValidacion {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 3. SECCIÓN DE PROCESO */
+.seccionProceso {
+  padding: 64px 40px;
+  background-color: var(--bg-primary);
+  text-align: center;
+}
+
+.tituloSeccion {
+  font-family: var(--font-titles);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0 0 48px 0;
+}
+
+.lineaProceso {
+  display: flex;
+  gap: 40px;
+}
+
+.paso {
+  flex: 1;
+  background-color: var(--bg-surface);
+  border: 1px solid #e2e8f0;
+  padding: 32px 24px;
+  border-radius: 4px;
+  position: relative;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+.numeroPaso {
+  width: 36px;
+  height: 36px;
+  background-color: var(--color-primary);
+  color: var(--bg-surface);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-titles);
+  font-weight: 800;
+  font-size: 1.1rem;
+  position: absolute;
+  top: -18px;
+  left: 24px;
+}
+
+.tituloPaso {
+  font-family: var(--font-titles);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 8px 0 12px 0;
+  text-align: left;
+}
+
+.textoPaso {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--text-main);
+  line-height: 1.6;
+  text-align: left;
+  margin: 0;
+}
+
+/* 4. SECCIÓN DE RESPALDO */
+.seccionRespaldo {
+  padding: 40px;
+  background-color: var(--bg-surface);
+  display: flex;
+  justify-content: center;
+}
+
+.tarjetaRespaldo {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid var(--color-primary);
+  padding: 32px;
+  max-width: 900px;
+  border-radius: 4px;
+}
+
+.tituloRespaldo {
+  font-family: var(--font-titles);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 12px 0;
+}
+
+.textoRespaldo {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--text-main);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 5. CTA FINAL */
+.ctaFinal {
+  background-color: var(--color-primary);
+  color: var(--bg-surface);
+  padding: 64px 20px;
+  text-align: center;
+}
+
+.tituloCtaFinal {
+  font-family: var(--font-titles);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.01em;
+}
+
+.bajadaCtaFinal {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  margin: 0 0 32px 0;
+  color: #e2e8f0;
+}
+
+.botonCtaGrande {
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  background-color: var(--color-action);
+  color: var(--bg-surface);
+  padding: 16px 36px;
+  border-radius: 4px;
+  display: inline-block;
+  transition: background-color 0.2s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.botonCtaGrande:hover {
+  background-color: #153e32;
+}
+
+/* RESPONSIVIDAD */
+@media (max-width: 768px) {
+  .tituloPrincipal {
+    font-size: 1.8rem;
+  }
+
+  .bloqueBotones {
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 20px;
+  }
+
+  .barraValidacion,
+  .lineaProceso {
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px 20px;
+  }
+
+  .seccionProceso,
+  .seccionRespaldo {
+    padding: 48px 20px;
+  }
+
+  .numeroPaso {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .tituloPaso,
+  .textoPaso {
+    text-align: center;
+  }
+}

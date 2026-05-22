@@ -1,0 +1,84 @@
+/* src/componentes/Footer/Footer.module.css */
+
+.footerGlobal {
+    width: 100%;
+    background-color: var(--color-primary);
+    color: var(--bg-surface);
+    padding: 60px 40px 40px 40px;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
+}
+
+.limiteAncho {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    box-sizing: border-box;
+}
+
+/* Información de la empresa */
+.seccionEmpresa {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.empresa {
+    margin: 0;
+    font-family: var(--font-titles);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--bg-surface);
+}
+
+.datosLegales {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #94a3b8;
+}
+
+/* Sección del equipo */
+.seccionEquipo {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tituloEquipo {
+    margin: 0;
+    font-family: var(--font-titles);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #a7f3d0;
+}
+
+.grillaEquipo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Móviles */
+@media (max-width: 768px) {
+    .footerGlobal {
+        padding: 40px 20px 30px 20px;
+    }
+    
+    .limiteAncho {
+        gap: 32px;
+    }
+    
+    .grillaEquipo {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}

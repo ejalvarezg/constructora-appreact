@@ -1,0 +1,162 @@
+/* src/componentes/ServicioCard/ServicioCard.module.css */
+
+.tarjeta {
+  background-color: var(--bg-surface);
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tarjeta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px -8px rgba(27, 77, 62, 0.15);
+}
+
+.contenedorImagen {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  background-color: #cbd5e1;
+}
+
+.imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.tarjeta:hover .imagen {
+  transform: scale(1.03);
+}
+
+/* Etiqueta de alcance sobre la imagen */
+.etiquetaAlcance {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background-color: var(--color-primary);
+  color: var(--bg-surface);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+
+/* Cuerpo de la tarjeta con texto y enlaces */
+.cuerpo {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.categoria {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.nombre {
+  margin: 0 0 10px 0;
+  font-family: var(--font-titles);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.3;
+}
+
+.resumen {
+  margin: 0 0 20px 0;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--text-main);
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.enlaceServicio {
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  transition: color 0.2s ease;
+}
+
+.enlaceServicio:hover {
+  color: var(--color-action);
+}
+
+.enlaceServicio span {
+  transition: transform 0.2s ease;
+}
+
+.enlaceServicio:hover span {
+  transform: translateX(4px);
+}
+
+.enlaceNombre {
+  text-decoration: none;
+  color: var(--color-primary);
+  transition: color 0.2s ease;
+}
+
+.enlaceNombre:hover {
+  color: var(--color-action);
+}
+
+.acciones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+/* Botón agregar a presupuesto */
+.botonAgregar {
+  background-color: var(--color-primary);
+  color: var(--bg-surface);
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.botonAgregar:hover {
+  background-color: var(--color-action);
+}
+
+.botonAgregar:active {
+  transform: scale(0.96);
+}
+
+.botonAgregado:disabled {
+  background-color: #cbd5e1; /* Gris técnico apagado */
+  color: #64748b;            /* Texto de bajo contraste */
+  cursor: not-allowed;       /* Cambia el cursor del mouse a prohibido */
+  transform: none;           /* Desactiva los efectos de escala al hacer clic */
+}

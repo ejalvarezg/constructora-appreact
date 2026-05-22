@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nombre": "Carlos Mendoza",
+    "puesto": "Maestro mayor de obras",
+    "matricula": "CPAU 14.520",
+    "imagen": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=120"
+  },
+  {
+    "id": 2,
+    "nombre": "Juan Rossi",
+    "puesto": "Plomero y gasista matriculado",
+    "matricula": "CAPBA 22.841",
+    "imagen": ""
+  },
+  {
+    "id": 3,
+    "nombre": "Elena Soto",
+    "puesto": "Electricista matriculada",
+    "matricula": "COPIME 4.890",
+    "imagen": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=120"
+  }
+]
