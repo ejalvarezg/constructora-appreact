@@ -74,7 +74,7 @@ Para descargar el proyecto, instalar sus dependencias de desarrollo y ejecutarlo
 
 1. **Clonar el repositorio:**
 ```
-   git clone https://github.com/ejalvarezg/constructora-appreact.git](https://github.com/ejalvarezg/constructora-appreact.git)
+   git clone https://github.com/ejalvarezg/constructora-appreact.git
 ```
 
 2. **Ingresar a la carpeta del proyecto:**
