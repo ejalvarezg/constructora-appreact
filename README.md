@@ -21,20 +21,20 @@ El código está organizado de forma modular e intuitiva para facilitar su mante
 
 ```
 src/
-├── componentes/          # Elementos visuales reutilizables de la interfaz
-│   ├── Header/           # Cabecera superior institucional con logotipo de la marca
-│   ├── Navbar/           # Barra de navegación con menú hamburguesa adaptativo para móviles
-│   ├── Layout/           # Estructura visual común del sitio (organizador de Header, Contenido y Footer)
-│   ├── ServicioCard/     # Tarjetas del catálogo con botón interactivo de preselección
-│   └── TarjetasMiembros/ # Fichas individuales que muestran las matrículas del personal técnico
-├── context/              # El almacén global de la aplicación (CartContext)
-├── paginas/              # Vistas completas asociadas al sistema de enrutamiento
-│   ├── Inicio/           # Portada principal con propuesta de valor, procesos y garantías operativas
-│   ├── Servicios/        # Catálogo integral de rubros y especialidades con carga de datos remota
-│   ├── ServicioDetalle/  # Ficha técnica extendida y alcance pormenorizado de cada prestación
-│   └── Carrito/          # Panel final de consolidación del presupuesto técnico y datos de emplazamiento
-├── App.jsx               # Enrutador principal que define los accesos a cada sección del sitio
-└── main.jsx              # Punto de entrada de la aplicación que inyecta el almacén de datos central
+├── componentes/          
+│   ├── Header/           
+│   ├── Navbar/           
+│   ├── Layout/           
+│   ├── ServicioCard/     
+│   └── TarjetasMiembros/ 
+├── context/              
+├── paginas/              
+│   ├── Inicio/           
+│   ├── Servicios/        
+│   ├── ServicioDetalle/  
+│   └── Carrito/          
+├── App.jsx               
+└── main.jsx              
 ```
 
 ---
