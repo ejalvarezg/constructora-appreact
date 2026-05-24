@@ -20,21 +20,33 @@ El objetivo principal de la aplicación es solucionar la recolección desorganiz
 El código está organizado de forma modular e intuitiva para facilitar su mantenimiento:
 
 ```
-src/
-├── componentes/          
-│   ├── Header/           
-│   ├── Navbar/           
-│   ├── Layout/           
-│   ├── ServicioCard/     
-│   └── TarjetasMiembros/ 
-├── context/              
-├── paginas/              
-│   ├── Inicio/           
-│   ├── Servicios/        
-│   ├── ServicioDetalle/  
-│   └── Carrito/          
-├── App.jsx               
-└── main.jsx              
+constructora-bricks/
+├── public/
+│   └── data/
+│       ├── personal.json
+│       └── servicios.json
+├── src/
+│   ├── componentes/
+│   │   ├── Header/
+│   │   ├── Navbar/
+│   │   ├── Layout/
+│   │   ├── ServicioCard/
+│   │   └── TarjetasMiembros/
+│   ├── context/
+│   │   └── CartContext.jsx
+│   ├── paginas/
+│   │   ├── Inicio/
+│   │   ├── Servicios/
+│   │   ├── ServicioDetalle/
+│   │   └── Carrito/
+│   ├── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── index.html
+├── package.json
+├── vite.config.js
+└── README.md            
 ```
 
 ---
