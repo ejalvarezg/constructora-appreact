@@ -98,3 +98,44 @@ npm run dev
 
 5. **Abrir la aplicación:**
 Una vez iniciado el servidor, la terminal te indicará una dirección web local (por lo general `http://localhost:5173`). Copiá esa dirección en tu navegador para probar el sistema.
+
+
+
+
+# OTRA COSA
+
+
+Actuá como un Administrador de Bases de Datos (DBA) y Arquitecto de Software experto en PostgreSQL. Necesito diseñar el modelo relacional físico (script DDL completo) para un sistema de gestión de Propiedad Horizontal (Administración de Consorcios) que utiliza una arquitectura limpia.
+
+El diseño debe ser multi-consorcio y soportar de forma estricta las siguientes reglas de negocio y entidades que ya tengo estructuradas a nivel lógico:
+
+1. INFRAESTRUCTURA FÍSICA Y LEGAL:
+   - consorcios: id, razon_social, cuit, clave_suterh, direccion, datos_bancarios (pueden ser campos o un JSONB para múltiples cuentas).
+   - unidades_funcionales: id, consorcio_id, numero_unidad, piso, metros_cuadrados, porcentaje_participacion (NUMERIC/DECIMAL para el prorrateo de expensas).
+
+2. RELACIONES MUCHOS A MUCHOS (N:N) CON ATRIBUTOS (Usuarios y Roles):
+   - personas: id, nombre, apellido, dni, email, telefono, password_hash. Los datos personales son únicos y globales.
+   - vinculos_consorcio (Tabla intermedia N:N): Un usuario puede tener diferentes roles en diferentes unidades o edificios en simultáneo (ej: propietario en el Consorcio A, inquilino en el Consorcio B). 
+   - Esta tabla debe unir 'persona_id' con 'unidad_funcional_id' e incluir un campo 'tipo_rol' de tipo ENUM o con un CHECK para los valores: ('Administrador', 'Propietario', 'Inquilino', 'Consejo'). Añadir un CONSTRAINT UNIQUE compuesto para evitar duplicados del mismo rol en la misma unidad.
+
+3. MANTENIMIENTO, RECLAMOS Y PROVEEDORES:
+   - proveedores: id, razon_social, cuit, gremio_tecnico (plomero, electricista, ascensorista, etc.), telefono, email.
+   - consorcios_proveedores (Tabla intermedia N:N): Vincula qué proveedores trabajan para qué consorcios.
+   - sectores_comunes: id, consorcio_id, nombre_sector (ej: "Ascensor N°1", "Caldera Central", "SUM", "Palieres").
+   - reclamos: id, persona_id (quien reclama), unidad_funcional_id (nullable), sector_comun_id (nullable), descripcion, estado ('Pendiente', 'En Revisión', 'Proveedor Asignado', 'Solucionado'), fecha_creacion.
+   * REQUISITO: Si la falla es en un sector común, 'unidad_funcional_id' queda en NULL. Si es dentro de un departamento, 'sector_comun_id' queda en NULL.
+   - presupuestos: id, reclamo_id, proveedor_id, valor_total, cantidad_cuotas, estado ('Pendiente', 'Aprobado', 'Rechazado').
+
+4. LOGÍSTICA FINANCIERA (Gastos, Liquidaciones y Cuentas Corrientes):
+   - gastos_devengados: id, consorcio_id, concepto, monto, tipo_fondo ('Ordinario', 'Extraordinario', 'Fondo Especial Cocheras'), periodo_liquidacion (mes/año). Puede vincularse a un 'sector_comun_id' de forma opcional si el gasto derivó de allí.
+   - liquidaciones_expensas (Histórico Inmutable): Actúa como un cierre de caja mensual por consorcio. Registra el total de gastos ordinarios/extraordinarios de ese mes y el saldo deudor consolidado a la fecha de emisión.
+   - cuenta_corriente_unidades (Estado Vivo): Tabla que registra los movimientos en tiempo real por unidad funcional (emisión de expensa como saldo en contra, cobro de intereses, e ingresos por pagos mediante recibos).
+   - pagos_recibos: id, unidad_funcional_id, monto, fecha_pago, forma_pago. Impacta directamente en la cuenta corriente viva.
+
+¿QUÉ NECESITO QUE GENERES?
+1. El script DDL de PostgreSQL completo, ordenado secuencialmente para que no haya conflictos de llaves foráneas.
+2. El uso de tipos de datos correctos (ej: NUMERIC para dinero y porcentajes, TIMESTAMPTZ para fechas con zona horaria, ENUMs o CHECKs donde corresponda).
+3. Todas las llaves primarias, foráneas (con sus respectivas reglas ON DELETE si aplican) y restricciones UNIQUE compuestas necesarias.
+4. Una función en PL/pgSQL (STORED PROCEDURE o TRIGGER) que sirva como ejemplo pedagógico de automatización para calcular el prorrateo básico de una expensa ordinaria: debe tomar el total de gastos ordinarios de un consorcio para un período y calcular el monto correspondiente para una unidad funcional multiplicando ese total por su 'porcentaje_participacion'.
+
+Utilizá nomenclatura estándar de bases de datos profesionales (snake_case) y agregá comentarios breves en las tablas principales.

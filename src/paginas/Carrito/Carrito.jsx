@@ -47,6 +47,11 @@ export function Carrito() {
         vaciarCarrito();
     };
 
+    // Confirmación antes de vaciar el carrito
+    const handleVaciar = () => {
+        if (confirm('¿Vaciar el carrito?')) vaciarCarrito();
+    };
+
     return (
         <div className={styles.contenedor}>
             <div className={styles.encabezado}>
@@ -131,14 +136,24 @@ export function Carrito() {
                         <div className={styles.listaVacia}>
                             <p className={styles.textoVacio}>No ha seleccionado ningún servicio.</p>
                             <Link to="/servicios" className={styles.botonAgregarRubros}>
-                                + Agregar rubros
+                                + Agregar servicios
                             </Link>
                         </div>
                     ) : (
                         <div className={styles.lista}>
-                            <Link to="/servicios" className={styles.botonAgregarRubros}>
-                                + Agregar rubros
-                            </Link>
+                            {/* Agregar servicios + Vaciar carrito */}
+                            <div className={styles.bloqueAcciones}>
+                                <Link to="/servicios" className={styles.botonAgregarRubros}>
+                                    + Agregar rubros
+                                </Link>
+                                <button
+                                    type="button"
+                                    className={styles.botonVaciar}
+                                    onClick={vaciarCarrito}
+                                >
+                                    Vaciar presupuesto
+                                </button>
+                            </div>
                             {serviciosSeleccionados.map((servicio) => (
                                 <div key={servicio.id} className={styles.cardServicioDinamico}>
                                     <div className={styles.encabezadoCard}>
