@@ -9,9 +9,9 @@ export function ServicioCard({ servicio }) {
     const rutaDestino = `/servicio/${servicio.id}`;
 
     // Acceso a la función de agregar servicio desde el contexto del carrito
-    const { serviciosSeleccionados, agregarServicio } = useContext(CartContext);
+    const { agregarServicio, isInCart } = useContext(CartContext);
 
-    const yaAgregado = serviciosSeleccionados.some(item => item.id === servicio.id);
+    const yaAgregado = isInCart(servicio.id);
 
     return (
         <div className={styles.tarjeta}>

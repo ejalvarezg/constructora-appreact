@@ -21,9 +21,9 @@
         "type": "select",
         "opciones": [
           "Terraza de Uso Común / Azotea",
-          "Muro Medianero Externo",
+          "Muro Medianero",
           "Pozo de Aire y Luz",
-          "Balcones del Frente / Contrafrente"
+          "Balcones / Contrafrentes / Frentes de Fachada"
         ]
       },
       {
@@ -113,7 +113,7 @@
           "Servicio Cortado Preventivamente por la Distribuidora",
           "Fuga de Gas detectada (Servicio activo con olor a gas)",
           "Adecuación / Renovación de cañerías",
-          "Inspección Preventiva de Rutina"
+          "Inspección Rutina"
         ]
       },
       {
@@ -141,7 +141,7 @@
         "opciones": [
           "Hall de Entrada y Accesos Comunes",
           "Palieres y Pasillos de Circulación",
-          "Caja de Escaleras Completa",
+          "Caja de Escaleras y Ascensores",
           "Cocheras / Bauleras",
           "Unidades Funcionales"
         ]

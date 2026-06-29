@@ -9,7 +9,7 @@ export function ServicioDetalle() {
     const [servicio, setServicio] = useState(null);
     const [cargando, setCargando] = useState(true);
 
-    const { agregarServicio } = useContext(CartContext);
+    const { agregarServicio, isInCart } = useContext(CartContext);
 
     useEffect(() => {
         fetch('/data/servicios.json')
@@ -36,6 +36,8 @@ export function ServicioDetalle() {
         );
     }
 
+    const yaAgregado = isInCart(servicio.id);
+
     return (
         <article className={styles.bloqueDetalle}>
             {/* Panel izquierdo con imagen y metadatos */}
@@ -58,8 +60,9 @@ export function ServicioDetalle() {
                 <button
                     className={styles.botonCotizar}
                     onClick={() => agregarServicio(servicio)}
+                    disabled={yaAgregado}
                 >
-                    Añadir al presupuesto
+                    {yaAgregado ? 'Ya añadido al presupuesto ✓' : 'Añadir al presupuesto'}
                 </button>
             </div>
         </article>
