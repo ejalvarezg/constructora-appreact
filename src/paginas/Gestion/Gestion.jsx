@@ -2,11 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
+
+import { FormularioServicio } from '../../componentes/FormularioServicio/FormularioServicio';
+
 import styles from './Gestion.module.css';
 
 export function Gestion() {
     const [servicios, setServicios] = useState([]);
     const [cargando, setCargando] = useState(true);
+
+    // Estados para controlar la visibilidad del formulario y el servicio a editar
+    const [mostrarFormulario, setMostrarFormulario] = useState(false);
+    const [servicioAEditar, setServicioAEditar] = useState(null);
 
     // Función para leer los datos de Firebase (Read)
     const cargarServicios = () => {
@@ -21,7 +28,6 @@ export function Gestion() {
             .finally(() => setCargando(false));
     };
 
-    // Ejecuta la carga al montar el componente
     useEffect(() => {
         cargarServicios();
     }, []);
@@ -32,11 +38,11 @@ export function Gestion() {
 
         if (confirmar) {
             try {
-                // Referencia exacta al documento que queremos borrar
+                // Referencia al documento que se va a borrar
                 const documentoRef = doc(db, "servicios", id);
                 await deleteDoc(documentoRef);
 
-                // Actualizamos el estado local filtrando el eliminado (para no recargar toda la base de datos)
+                // Se filtra el eliminado
                 setServicios(servicios.filter(servicio => servicio.id !== id));
             } catch (error) {
                 console.error("Error al intentar eliminar:", error);
@@ -45,14 +51,58 @@ export function Gestion() {
         }
     };
 
+    // Lista de categorías existentes
+    const categoriasExistentes = [...new Set(servicios.map(servicio => servicio.categoria))];
+
+    // Funciones para botones del formulario
+
+    // Nuevo servicio
+    const handleNuevoServicio = () => {
+        setServicioAEditar(null);
+        setMostrarFormulario(true);
+    };
+
+    // Formulario con datos del servicio a editar
+    const handleEditarServicio = (servicio) => {
+        setServicioAEditar(servicio);
+        setMostrarFormulario(true);
+    };
+
+    // Cierra el formulario sin guardar cambios
+    const handleCerrarFormulario = () => {
+        setMostrarFormulario(false);
+        setServicioAEditar(null);
+    };
+
+    // Se ejecuta cuando el formulario termina de hacer addDoc o updateDoc exitosamente
+    const handleGuardadoExitoso = () => {
+        handleCerrarFormulario();
+        cargarServicios(); // Refrescamos la tabla para ver los cambios impactados en Firebase
+    };
+
     return (
         <div className={styles.contenedorGestion}>
             <div className={styles.cabecera}>
                 <h2 className={styles.titulo}>Panel de Gestión de Servicios</h2>
                 <p className={styles.subtitulo}>Administración del catálogo de la constructora</p>
-                {/* Aquí montaremos el FormularioServicio en el próximo paso */}
-                <button className={styles.botonCrear}>+ Nuevo Servicio</button>
+
+                {/* Abre el formulario vacío (solo si no está abierto ya) */}
+                {!mostrarFormulario && (
+                    <button className={styles.botonCrear} onClick={handleNuevoServicio}>
+                        + Nuevo Servicio
+                    </button>
+                )}
             </div>
+
+            {/* Renderizado condicional del formulario */}
+            {mostrarFormulario && (
+                <FormularioServicio
+                    servicioAEditar={servicioAEditar}
+                    alCancelar={handleCerrarFormulario}
+                    alGuardarConExito={handleGuardadoExitoso}
+                    categoriasExistentes={categoriasExistentes}
+                />
+            )}
 
             {cargando ? (
                 <div className={styles.estadoCarga}>Sincronizando con la base de datos...</div>
@@ -74,7 +124,16 @@ export function Gestion() {
                                     <td className={styles.celdaNombre}>{servicio.nombre}</td>
                                     <td>{servicio.alcance}</td>
                                     <td className={styles.celdaAcciones}>
-                                        <button className={styles.botonEditar}>Editar</button>
+
+                                        {/* Botón Editar conectado al servicio */}
+                                        <button
+                                            className={styles.botonEditar}
+                                            onClick={() => handleEditarServicio(servicio)}
+                                        >
+                                            Editar
+                                        </button>
+
+                                        {/* Botón Eliminar conectado a id y nombre */}
                                         <button
                                             className={styles.botonEliminar}
                                             onClick={() => eliminarServicio(servicio.id, servicio.nombre)}
@@ -84,6 +143,8 @@ export function Gestion() {
                                     </td>
                                 </tr>
                             ))}
+
+                            {/* Mensaje si la base de datos no tiene documentos */}
                             {servicios.length === 0 && (
                                 <tr>
                                     <td colSpan="4" className={styles.tablaVacia}>No hay servicios registrados en la base de datos.</td>

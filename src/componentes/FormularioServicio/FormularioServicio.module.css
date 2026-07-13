@@ -1,0 +1,136 @@
+/* src/componentes/FormularioServicio/FormularioServicio.module.css */
+
+.formularioContenedor {
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 24px;
+    margin-bottom: 32px;
+}
+
+.tituloFormulario {
+    font-family: var(--font-titles);
+    color: var(--color-primary);
+    margin: 0 0 20px 0;
+    font-size: 1.3rem;
+}
+
+.alertaError {
+    background-color: #fef2f2;
+    color: #ef4444;
+    padding: 12px;
+    border: 1px solid #fca5a5;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+}
+
+.gridFormulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.campoCompleto {
+    grid-column: 1 / -1;
+}
+
+.grupoInput {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.grupoInput label {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.grupoInput input,
+.grupoInput select,
+.grupoInput textarea {
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-family: var(--font-body);
+    color: var(--text-main);
+}
+
+.grupoInput input:focus,
+.grupoInput select:focus,
+.grupoInput textarea:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -1px;
+}
+
+.accionesFormulario {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #cbd5e1;
+}
+
+.botonGuardar, .botonCancelar {
+    padding: 10px 20px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.botonGuardar {
+    background-color: var(--color-action);
+    color: var(--bg-surface);
+    border: none;
+}
+
+.botonGuardar:disabled {
+    background-color: #94a3b8;
+    cursor: not-allowed;
+}
+
+.botonCancelar {
+    background-color: transparent;
+    color: var(--text-muted);
+    border: 1px solid #cbd5e1;
+}
+
+.contenedorNuevaCategoria {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.contenedorNuevaCategoria input {
+    flex: 1; /* Para que el input ocupe todo el espacio disponible */
+}
+
+.botonCancelarCategoria {
+    background-color: #fef2f2;
+    color: #ef4444;
+    border: 1px solid #fca5a5;
+    border-radius: 4px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botonCancelarCategoria:hover {
+    background-color: #fca5a5;
+    color: #991b1b;
+}
+
+.opcionNueva {
+    font-weight: 700;
+    color: var(--color-primary);
+    background-color: #f8fafc;
+}
