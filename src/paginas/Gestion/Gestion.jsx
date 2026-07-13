@@ -1,5 +1,5 @@
 // src/paginas/Gestion/Gestion.jsx
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,9 @@ import { FormularioServicio } from '../../componentes/FormularioServicio/Formula
 import styles from './Gestion.module.css';
 
 export function Gestion() {
+    // Referencia al formulario para volver a él al editar un servicio
+    const formularioRef = useRef(null);
+
     const [servicios, setServicios] = useState([]);
     const [cargando, setCargando] = useState(true);
 
@@ -83,6 +86,16 @@ export function Gestion() {
     const handleEditarServicio = (servicio) => {
         setServicioAEditar(servicio);
         setMostrarFormulario(true);
+
+        // Desplazamiento suave hacia el formulario al editar un servicio
+        setTimeout(() => {
+            if (formularioRef.current) {
+                formularioRef.current.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }, 0);
     };
 
     // Cierra el formulario sin guardar cambios
@@ -118,12 +131,14 @@ export function Gestion() {
 
             {/* Renderizado condicional del formulario */}
             {mostrarFormulario && (
-                <FormularioServicio
-                    servicioAEditar={servicioAEditar}
-                    alCancelar={handleCerrarFormulario}
-                    alGuardarConExito={handleGuardadoExitoso}
-                    categoriasExistentes={categoriasExistentes}
-                />
+                <div ref={formularioRef} style={{ scrollMarginTop: '100px' }}>
+                    <FormularioServicio
+                        servicioAEditar={servicioAEditar}
+                        alCancelar={handleCerrarFormulario}
+                        alGuardarConExito={handleGuardadoExitoso}
+                        categoriasExistentes={categoriasExistentes}
+                    />
+                </div>
             )}
 
             {cargando ? (
