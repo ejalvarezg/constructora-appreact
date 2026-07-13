@@ -44,13 +44,10 @@ Para descargar el proyecto, compilar sus dependencias en desarrollo y ejecutarlo
    git clone [https://github.com/ejalvarezg/constructora-appreact.git](https://github.com/ejalvarezg/constructora-appreact.git)
    ```
 
-````
-
 2. **Ingresar al directorio raíz del proyecto:**
 ```bash
 cd constructora-appreact
-
-````
+```
 
 3. **Instalar el árbol de dependencias:**
    Este comando inspeccionará el archivo `package.json` y descargará de forma segura las librerías necesarias (incluyendo React, React Router Dom y Firebase).
@@ -70,4 +67,3 @@ npm run dev
 5. **Visualizar la aplicación:**
    Abra su navegador predeterminado e ingrese a la dirección local provista por la terminal (por defecto, `http://localhost:5173`).
 
-```
