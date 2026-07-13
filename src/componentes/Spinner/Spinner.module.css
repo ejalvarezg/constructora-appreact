@@ -1,0 +1,36 @@
+/* src/componentes/Spinner/Spinner.module.css */
+
+.contenedorSpinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    width: 100%;
+    gap: 16px;
+    box-sizing: border-box;
+}
+
+.ruedaAnimada {
+    width: 45px;
+    height: 45px;
+    border: 4px solid rgba(27, 77, 62, 0.15);
+    border-radius: 50%;
+    border-top-color: var(--color-primary);
+    animation: girarRueda 0.8s linear infinite;
+}
+
+.textoMensaje {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin: 0;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+@keyframes girarRueda {
+    to {
+        transform: rotate(360deg);
+    }
+}

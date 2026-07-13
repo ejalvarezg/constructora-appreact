@@ -1,6 +1,7 @@
 // src/paginas/Servicios/Servicios.jsx
 import React, { useState, useEffect } from 'react';
 import { ServicioCard } from '../../componentes/ServicioCard/ServicioCard';
+import { Spinner } from '../../componentes/Spinner/Spinner';
 import styles from './Servicios.module.css';
 
 // --- IMPORTACIÓN DE FIREBASE ----------------------------
@@ -47,9 +48,7 @@ export function Servicios() {
             </div>
 
             {cargando ? (
-                <div className={styles.precarga}>
-                    <p>Sincronizando registros con el servidor...</p>
-                </div>
+                <Spinner mensaje="Sincronizando catálogo de servicios..." />
             ) : (
                 <div className={styles.grilla}>
                     {listaServicios.map((servicio) => (

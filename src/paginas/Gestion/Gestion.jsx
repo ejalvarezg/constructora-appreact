@@ -4,6 +4,7 @@ import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import { Spinner } from '../../componentes/Spinner/Spinner';
 
 import { FormularioServicio } from '../../componentes/FormularioServicio/FormularioServicio';
 
@@ -126,13 +127,13 @@ export function Gestion() {
             )}
 
             {cargando ? (
-                <div className={styles.estadoCarga}>Sincronizando con la base de datos...</div>
+                <Spinner mensaje="Sincronizando registros con los servidores de Firebase..." />
             ) : (
                 <div className={styles.tablaContenedor}>
                     <table className={styles.tabla}>
                         <thead>
                             <tr>
-                                <th>Rubro / Categoría</th>
+                                <th>Categoría</th>
                                 <th>Nombre del Servicio</th>
                                 <th>Alcance</th>
                                 <th className={styles.columnaAcciones}>Acciones</th>
