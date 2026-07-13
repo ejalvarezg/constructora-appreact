@@ -40,6 +40,13 @@ export function Navbar() {
                     </Link>
                 </li>
 
+                {/* Panel de gestión */}
+                <li>
+                    <Link to="/gestion" className={styles.enlace} onClick={() => setMenuAbierto(false)}>
+                        Panel Admin
+                    </Link>
+                </li>
+
                 {/* Mi Presupuesto */}
                 <li>
                     <Link to="/carrito" className={styles.enlaceCarrito} onClick={() => setMenuAbierto(false)}>

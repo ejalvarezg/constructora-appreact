@@ -8,7 +8,7 @@ export function ServicioCard({ servicio }) {
     // Ruta guardada en variable
     const rutaDestino = `/servicio/${servicio.id}`;
 
-    // Acceso a la función de agregar servicio desde el contexto del carrito
+    // Funciones del contexto del carrito
     const { agregarServicio, isInCart } = useContext(CartContext);
 
     const yaAgregado = isInCart(servicio.id);
@@ -19,7 +19,7 @@ export function ServicioCard({ servicio }) {
                 <div className={styles.contenedorImagen}>
                     <img
                         src={servicio.imagen}
-                        alt={`Ficha de obra: ${servicio.nombre}`}
+                        alt={`Servicio(s): ${servicio.nombre}`}
                         className={styles.imagen}
                     />
                     <span className={styles.etiquetaAlcance}>{servicio.alcance}</span>

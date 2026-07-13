@@ -4,6 +4,11 @@ import { useParams, Link } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
 import styles from './ServicioDetalle.module.css';
 
+// --- AGREGADO PARA FIREBASE -----------------------------
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase/config';
+// --------------------------------------------------------
+
 export function ServicioDetalle() {
     const { id } = useParams();
     const [servicio, setServicio] = useState(null);
@@ -12,17 +17,25 @@ export function ServicioDetalle() {
     const { agregarServicio, isInCart } = useContext(CartContext);
 
     useEffect(() => {
-        fetch('/data/servicios.json')
-            .then(res => {
-                if (!res.ok) throw new Error('Error al conectar con la base de datos de servicios.');
-                return res.json();
-            })
-            .then(data => {
-                const encontrado = data.find(item => item.id === parseInt(id, 10));
+        // --- Firebase en lugar de fetch local ---
+        const serviciosCollection = collection(db, "servicios");
+
+        getDocs(serviciosCollection)
+            .then((respuesta) => {
+                // Obtener todos los documentos y les inyectamos el ID alfanumérico de Firebase
+                const data = respuesta.docs.map((doc) => ({
+                    ...doc.data(),
+                    id: doc.id
+                }));
+
+                // Buscamos el servicio comparando los IDs (ambos son strings ahora)
+                const encontrado = data.find(item => item.id === id);
                 setServicio(encontrado || null);
             })
-            .catch(err => console.error(err))
+            .catch(err => console.error("Error al buscar detalle en Firebase:", err))
             .finally(() => setCargando(false));
+        // -----------------------------------------------
+
     }, [id]);
 
     if (cargando) return <div className={styles.mensajeEstado}>Cargando servicio...</div>;
@@ -61,6 +74,8 @@ export function ServicioDetalle() {
                     className={styles.botonCotizar}
                     onClick={() => agregarServicio(servicio)}
                     disabled={yaAgregado}
+                    // Deshabilitado si el servicio ya está agregado al carrito
+                    style={yaAgregado ? { opacity: 0.6, cursor: 'not-allowed' } : {}}
                 >
                     {yaAgregado ? 'Ya añadido al presupuesto ✓' : 'Añadir al presupuesto'}
                 </button>

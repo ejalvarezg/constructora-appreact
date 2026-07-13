@@ -3,23 +3,40 @@ import React, { useState, useEffect } from 'react';
 import { ServicioCard } from '../../componentes/ServicioCard/ServicioCard';
 import styles from './Servicios.module.css';
 
+// --- IMPORTACIÓN DE FIREBASE ----------------------------
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase/config';
+// --------------------------------------------------------
+
 export function Servicios() {
     const [listaServicios, setListaServicios] = useState([]);
     const [cargando, setCargando] = useState(true);
 
     useEffect(() => {
-        fetch('/data/servicios.json')
-            .then(respuesta => {
-                if (!respuesta.ok) {
-                    throw new Error('Error al intentar obtener los servicios disponibles.');
-                }
-                return respuesta.json();
+        // --- Firebase en lugar de fetch local ---
+        // Busca en la base de datos la colección que llamada 'servicios'
+        const serviciosCollection = collection(db, "servicios");
+
+        // Obtiene los documentos de la colección y los mapea a un arreglo de objetos
+        getDocs(serviciosCollection)
+            .then((respuesta) => {
+                const serviciosLimpios = respuesta.docs.map((doc) => ({
+                    // Extrae los datos del documento y agrega el ID del documento como propiedad
+                    ...doc.data(),
+                    id: doc.id
+                }));
+                // Actualiza el estado con la lista de servicios obtenida de Firebase
+                setListaServicios(serviciosLimpios);
             })
-            .then(data => setListaServicios(data))
-            .catch(error => console.error("Error en catálogo:", error))
+            // Captura cualquier error que ocurra durante la obtención de los documentos y lo registra en la consola
+            .catch((error) => console.error("Error en catálogo (Firebase):", error))
+            // Deja de cargar para mostrar los servicios o el mensaje de error
             .finally(() => setCargando(false));
+        // -----------------------------------------------
+
     }, []);
 
+    // Renderizado condicional: mensaje de carga mientras se obtienen los servicios, o la lista de servicios en tarjetas
     return (
         <div className={styles.contenedor}>
             <div className={styles.encabezadoSeccion}>

@@ -1,0 +1,143 @@
+/* src/paginas/Gestion/Gestion.module.css */
+
+.contenedorGestion {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.cabecera {
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.titulo {
+    font-family: var(--font-titles);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.subtitulo {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin: 0 0 16px 0;
+}
+
+.botonCrear {
+    background-color: var(--color-primary);
+    color: var(--bg-surface);
+    border: none;
+    padding: 10px 20px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.estadoCarga {
+    text-align: center;
+    padding: 40px;
+    background-color: var(--bg-surface);
+    color: var(--text-muted);
+    border-radius: 4px;
+    border: 1px dashed #cbd5e1;
+}
+
+/* Estilos de la tabla administrativa */
+.tablaContenedor {
+    background-color: var(--bg-surface);
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    overflow-x: auto;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.tabla th {
+    background-color: #f8fafc;
+    color: var(--text-muted);
+    font-weight: 600;
+    padding: 16px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.tabla td {
+    padding: 16px;
+    border-bottom: 1px solid #e2e8f0;
+    color: var(--text-main);
+    vertical-align: middle;
+}
+
+.tabla tr:last-child td {
+    border-bottom: none;
+}
+
+.celdaNombre {
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.badgeCategoria {
+    background-color: #e2e8f0;
+    color: var(--text-muted);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.columnaAcciones {
+    text-align: right;
+}
+
+.celdaAcciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.botonEditar, .botonEliminar {
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.botonEditar {
+    color: var(--color-primary);
+    border-color: #cbd5e1;
+}
+
+.botonEliminar {
+    color: #ef4444;
+    border-color: #fca5a5;
+}
+
+.botonEliminar:hover {
+    background-color: #fef2f2;
+}
+
+.tablaVacia {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 40px;
+}
