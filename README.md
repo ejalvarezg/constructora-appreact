@@ -40,10 +40,9 @@ La aplicación cumple con los siguientes requerimientos:
 Para descargar el proyecto, compilar sus dependencias en desarrollo y ejecutarlo localmente, ejecute la siguiente secuencia de comandos desde su terminal:
 
 1. **Clonar el repositorio:**
-   ```bash
-   git clone https://github.com/ejalvarezg/constructora-appreact.git
-
-   ```
+```bash
+git clone https://github.com/ejalvarezg/constructora-appreact.git
+```
 
 2. **Ingresar al directorio raíz del proyecto:**
 ```bash
