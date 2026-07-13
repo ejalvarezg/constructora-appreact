@@ -2,11 +2,15 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
+import { AuthContext } from '../../context/AuthContext';
 import styles from './Navbar.module.css';
 
 export function Navbar() {
     // Acceso al contexto para obtener el estado del carrito
     const { serviciosSeleccionados } = useContext(CartContext);
+
+    // Usuario actual
+    const { usuario } = useContext(AuthContext);
 
     // Estado para controlar la visibilidad del menú colapsable en móviles
     const [menuAbierto, setMenuAbierto] = useState(false);
@@ -41,11 +45,21 @@ export function Navbar() {
                 </li>
 
                 {/* Panel de gestión */}
-                <li>
-                    <Link to="/gestion" className={styles.enlace} onClick={() => setMenuAbierto(false)}>
-                        Panel Admin
-                    </Link>
-                </li>
+                {usuario ? (
+                    // Usuario logueado: accede al panel de gestión
+                    <li>
+                        <Link to="/gestion" className={styles.enlaceAdminActivo} onClick={() => setMenuAbierto(false)}>
+                            Panel Admin 🛠️
+                        </Link>
+                    </li>
+                ) : (
+                    // Usuario no logueado: acceso al login
+                    <li>
+                        <Link to="/login" className={styles.enlaceLoginDiscreto} onClick={() => setMenuAbierto(false)}>
+                            Ingresar
+                        </Link>
+                    </li>
+                )}
 
                 {/* Mi Presupuesto */}
                 <li>

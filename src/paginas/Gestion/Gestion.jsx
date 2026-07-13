@@ -1,7 +1,9 @@
 // src/paginas/Gestion/Gestion.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 import { FormularioServicio } from '../../componentes/FormularioServicio/FormularioServicio';
 
@@ -14,6 +16,9 @@ export function Gestion() {
     // Estados para controlar la visibilidad del formulario y el servicio a editar
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
     const [servicioAEditar, setServicioAEditar] = useState(null);
+
+    const { logout } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     // Función para leer los datos de Firebase (Read)
     const cargarServicios = () => {
@@ -56,6 +61,17 @@ export function Gestion() {
 
     // Funciones para botones del formulario
 
+    // Función para cerrar sesión y redirigir a Inicio
+    const handleLogout = async () => {
+        try {
+            await logout();
+            navigate('/'); // Redirección inmediata a Inicio tras desconectar
+        } catch (error) {
+            console.error("Error al cerrar sesión:", error);
+            alert("No se pudo cerrar la sesión correctamente.");
+        }
+    };
+
     // Nuevo servicio
     const handleNuevoServicio = () => {
         setServicioAEditar(null);
@@ -83,7 +99,12 @@ export function Gestion() {
     return (
         <div className={styles.contenedorGestion}>
             <div className={styles.cabecera}>
-                <h2 className={styles.titulo}>Panel de Gestión de Servicios</h2>
+                <div className={styles.filaTitulo}>
+                    <h2 className={styles.titulo}>Panel de Gestión de Servicios</h2>
+                    <button className={styles.botonLogout} onClick={handleLogout}>
+                        Cerrar Sesión
+                    </button>
+                </div>
                 <p className={styles.subtitulo}>Administración del catálogo de la constructora</p>
 
                 {/* Abre el formulario vacío (solo si no está abierto ya) */}

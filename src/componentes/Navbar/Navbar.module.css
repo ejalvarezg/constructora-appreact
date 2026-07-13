@@ -33,6 +33,31 @@
   background-color: var(--bg-primary);
 }
 
+.enlaceLoginDiscreto {
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 8px 12px;
+  transition: color 0.2s ease;
+}
+
+.enlaceLoginDiscreto:hover {
+  color: var(--color-primary);
+}
+
+.enlaceAdminActivo {
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  background-color: #e2e8f0;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
 /* Botón de carrito */
 .enlaceCarrito {
   position: relative;
