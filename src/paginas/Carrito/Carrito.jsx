@@ -2,6 +2,8 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
+import { collection, query, where, getDocs, addDoc, doc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase/config";
 import styles from './Carrito.module.css';
 
 
@@ -14,6 +16,12 @@ export function Carrito() {
     const { serviciosSeleccionados, eliminarServicio, vaciarCarrito } = useContext(CartContext);
 
     const [detallesTecnicos, setDetallesTecnicos] = useState({});
+
+    // Estados para manejo de cupones
+    const [codigoCupon, setCodigoCupon] = useState("");
+    const [cuponAplicado, setCuponAplicado] = useState(null);
+    const [mensajeCupon, setMensajeCupon] = useState({ texto: "", tipo: "" }); // tipo: 'exito' | 'error'
+    const [validandoCupon, setValidandoCupon] = useState(false);
 
     // Maneja campos del formulario del cliente
     const handleClienteChange = (e) => {
@@ -52,6 +60,74 @@ export function Carrito() {
         if (confirm('¿Vaciar el carrito?')) vaciarCarrito();
     };
 
+    const handleAplicarCupon = async (e) => {
+        e.preventDefault();
+        if (!codigoCupon.trim()) return;
+
+        setValidandoCupon(true);
+        setMensajeCupon({ texto: "", tipo: "" });
+
+        try {
+            // 1. Buscar el cupón en Firestore
+            const q = query(
+                collection(db, "cupones"),
+                where("codigo", "==", codigoCupon.trim().toUpperCase())
+            );
+            const querySnapshot = await getDocs(q);
+
+            if (querySnapshot.empty) {
+                setMensajeCupon({ texto: "El código ingresado no es válido o no existe.", tipo: "error" });
+                setValidandoCupon(false);
+                return;
+            }
+
+            const cuponDoc = querySnapshot.docs[0];
+            const cuponData = cuponDoc.data();
+
+            // 2. Validar si el cupón está activo
+            if (!cuponData.activo) {
+                setMensajeCupon({ texto: "Este beneficio ya no se encuentra disponible.", tipo: "error" });
+                return;
+            }
+
+            // 3. Comprobar límite de usos
+            if (cuponData.usosActuales >= cuponData.limiteUsos) {
+                setMensajeCupon({ texto: "El cupón ha alcanzado su límite máximo de usos.", tipo: "error" });
+                return;
+            }
+
+            // 4. Verificar fecha de vencimiento
+            const hoy = new Date();
+            hoy.setHours(0, 0, 0, 0);
+            const [anio, mes, dia] = cuponData.fechaVencimiento.split('-');
+            const fechaVenc = new Date(anio, mes - 1, dia);
+
+            if (hoy > fechaVenc) {
+                setMensajeCupon({ texto: "Este cupón ha caducado.", tipo: "error" });
+                return;
+            }
+
+            // 5. Si todo es válido, aplicar el cupón
+            setCuponAplicado({ id: cuponDoc.id, ...cuponData });
+            setMensajeCupon({
+                texto: `¡Beneficio validado! Se descontarán $${cuponData.monto.toLocaleString('es-AR')} del presupuesto final.`,
+                tipo: "exito"
+            });
+            setCodigoCupon(""); // Limpiar el input
+
+        } catch (error) {
+            console.error("Error al validar:", error);
+            setMensajeCupon({ texto: "Error de conexión al validar el cupón.", tipo: "error" });
+        } finally {
+            setValidandoCupon(false);
+        }
+    };
+
+    const removerCupon = () => {
+        setCuponAplicado(null);
+        setMensajeCupon({ texto: "", tipo: "" });
+    };
+
     return (
         <div className={styles.contenedor}>
             <div className={styles.encabezado}>
@@ -73,6 +149,7 @@ export function Carrito() {
                 <form onSubmit={handleSubmit} className={styles.formulario}>
                     <h3 className={styles.subtituloSeccion}>Datos del cliente</h3>
 
+                    {/* Nombre y apellido del cliente */}
                     <div className={styles.grupoInput}>
                         <label htmlFor="nombre">Nombre y Apellido / Razón Social *</label>
                         <input
@@ -82,6 +159,7 @@ export function Carrito() {
                         />
                     </div>
 
+                    {/* Dirección del cliente */}
                     <div className={styles.grupoInput}>
                         <label htmlFor="consorcio">Dirección *</label>
                         <input
@@ -91,6 +169,7 @@ export function Carrito() {
                         />
                     </div>
 
+                    {/* Correo electrónico y teléfono del cliente */}
                     <div className={styles.filaInputs}>
                         <div className={styles.grupoInput}>
                             <label htmlFor="email">Correo electrónico *</label>
@@ -110,8 +189,46 @@ export function Carrito() {
                         </div>
                     </div>
 
+                    {/* Cupón */}
+                    <div className={styles.contenedorCupon}>
+                        <h4 className={styles.tituloCupon}>¿Tienes un código de descuento?</h4>
+                        {!cuponAplicado ? (
+                            <div className={styles.formularioCupon}>
+                                <input
+                                    type="text"
+                                    placeholder="Ej: MICUPON"
+                                    value={codigoCupon}
+                                    onChange={(e) => setCodigoCupon(e.target.value)}
+                                    disabled={validandoCupon}
+                                />
+                                <button type="button" onClick={handleAplicarCupon} disabled={validandoCupon || !codigoCupon.trim()}>
+                                    {validandoCupon ? "Validando..." : "Aplicar"}
+                                </button>
+                            </div>
+                        ) : (
+                            <div className={styles.cuponActivo}>
+                                <span className={styles.iconoExito}>✔️</span>
+                                <div>
+                                    <strong>{cuponAplicado.codigo}</strong> aplicado.
+                                    <p className={styles.detalleMonto}>
+                                        Bonificación de ${cuponAplicado.monto.toLocaleString('es-AR')} reservada.
+                                    </p>
+                                </div>
+                                <button type="button" onClick={removerCupon} className={styles.botonRemover}>✕</button>
+                            </div>
+                        )}
+
+                        {/* Mensajes de error o éxito */}
+                        {mensajeCupon.texto && !cuponAplicado && (
+                            <p className={mensajeCupon.tipo === 'error' ? styles.mensajeError : styles.mensajeExito}>
+                                {mensajeCupon.texto}
+                            </p>
+                        )}
+                    </div>
+
+                    {/* Notas adicionales del cliente */}
                     <div className={styles.grupoInput}>
-                        <label htmlFor="observacionesGenerales">Notas Adicionales para el Inspector</label>
+                        <label htmlFor="observacionesGenerales">Notas Adicionales para el técnico</label>
                         <textarea
                             id="observacionesGenerales" name="observacionesGenerales" rows="4"
                             value={formularioCliente.observacionesGenerales} onChange={handleClienteChange}
