@@ -23,6 +23,9 @@ export function Carrito() {
     const [mensajeCupon, setMensajeCupon] = useState({ texto: "", tipo: "" }); // tipo: 'exito' | 'error'
     const [validandoCupon, setValidandoCupon] = useState(false);
 
+    // Estado para manejar la confirmación de pedido exitoso
+    const [pedidoExitoso, setPedidoExitoso] = useState(false);
+
     // Maneja campos del formulario del cliente
     const handleClienteChange = (e) => {
         const { name, value } = e.target;
@@ -40,19 +43,58 @@ export function Carrito() {
         });
     };
 
-    // Procesamiento y envío consolidado del pedido
-    const handleSubmit = (e) => {
+    // Procesamiento y envío del pedido a Firestore
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
         const pedidoFinal = {
             solicitante: formularioCliente,
-            modulosRequeridos: serviciosSeleccionados.map(s => ({
-                id: s.id, nombre: s.nombre, especificacionesEspecificas: detallesTecnicos[s.id] || {}
+            serviciosRequeridos: serviciosSeleccionados.map(s => ({
+                id: s.id,
+                nombre: s.nombre,
+                categoria: s.categoria,
+                especificaciones: detallesTecnicos[s.id] || {}
             })),
-            fechaRegistro: new Date().toLocaleDateString()
+            fechaRegistro: new Date().toISOString(),
+            estado: "Pendiente"
         };
-        console.log("Pedido Final:", pedidoFinal);
-        alert("Solicitud de presupuesto enviada con éxito.");
-        vaciarCarrito();
+
+        // Si se usó un cupón, queda registrado en el documento
+        if (cuponAplicado) {
+            pedidoFinal.descuentoAplicado = {
+                codigo: cuponAplicado.codigo,
+                monto: cuponAplicado.monto
+            };
+        }
+
+        try {
+            // Agregar el registro en la colección "solicitudes"
+            await addDoc(collection(db, "solicitudes"), pedidoFinal);
+
+            // Actualizar el contador del cupón
+            if (cuponAplicado) {
+                const nuevosUsos = cuponAplicado.usosActuales + 1;
+                const seAgoto = nuevosUsos >= cuponAplicado.limiteUsos;
+                const cuponRef = doc(db, "cupones", cuponAplicado.id);
+                await updateDoc(cuponRef, {
+                    usosActuales: nuevosUsos,
+                    activo: !seAgoto // Si se agotó, no puede usarse más
+                });
+            }
+
+            setPedidoExitoso(true);
+
+            vaciarCarrito();
+            setFormularioCliente({ nombre: '', consorcio: '', email: '', telefono: '', observacionesGenerales: '' });
+            setDetallesTecnicos({});
+            setCuponAplicado(null);
+            setCodigoCupon("");
+
+        } catch (error) {
+            console.error("Error al procesar la solicitud:", error);
+            setPedidoExitoso(false);
+            alert("Hubo un problema al enviar su pedido. Por favor, intente nuevamente.");
+        }
     };
 
     // Confirmación antes de vaciar el carrito
@@ -127,6 +169,23 @@ export function Carrito() {
         setCuponAplicado(null);
         setMensajeCupon({ texto: "", tipo: "" });
     };
+
+    if (pedidoExitoso) {
+        return (
+            <div className={styles.contenedorExito}>
+                <div className={styles.tarjetaExito}>
+                    <span className={styles.iconoGranExito}>✅</span>
+                    <h2 className={styles.tituloExito}>¡Solicitud enviada con éxito!</h2>
+                    <p className={styles.mensajeExitoFinal}>
+                        Hemos recibido su pedido de presupuesto detallado. Nuestro equipo técnico analizará la información y se pondrá en contacto a la brevedad para coordinar la visita de inspección.
+                    </p>
+                    <Link to="/" className={styles.botonVolverInicio}>
+                        Volver al Inicio
+                    </Link>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className={styles.contenedor}>
