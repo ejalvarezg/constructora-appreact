@@ -46,12 +46,19 @@ export function Navbar() {
 
                 {/* Panel de gestión */}
                 {usuario ? (
-                    // Usuario logueado: accede al panel de gestión
-                    <li>
-                        <Link to="/gestion" className={styles.enlaceAdminActivo} onClick={() => setMenuAbierto(false)}>
-                            Panel Admin 🛠️
-                        </Link>
-                    </li>
+                    // Usuario logueado: puede gestionar productos y cupones
+                    <>
+                        <li>
+                            <Link to="/gestion" className={styles.enlaceAdminActivo} onClick={() => setMenuAbierto(false)}>
+                                Panel Admin 🛠️
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/admin/cupones" className={styles.enlaceAdminActivo} onClick={() => setMenuAbierto(false)}>
+                                Cupones 🎟️
+                            </Link>
+                        </li>
+                    </>
                 ) : (
                     // Usuario no logueado: acceso al login
                     <li>

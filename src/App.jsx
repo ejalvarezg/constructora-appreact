@@ -8,6 +8,7 @@ import { Servicios } from './paginas/Servicios/Servicios';
 import { ServicioDetalle } from './paginas/ServicioDetalle/ServicioDetalle';
 import { Carrito } from './paginas/Carrito/Carrito';
 import { Gestion } from './paginas/Gestion/Gestion';
+import { GestionCupones } from './paginas/GestionCupones/GestionCupones';
 
 import { Login } from './paginas/Login/Login';
 import { RutaProtegida } from './componentes/RutaProtegida/RutaProtegida';
@@ -26,10 +27,22 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         {/* Rutas Protegidas */}
+
+        {/* Gestión de Servicios */}
         <Route path="/gestion"
           element={
             <RutaProtegida>
               <Gestion />
+            </RutaProtegida>
+          }
+        />
+
+        {/* Gestión de Cupones */}
+        <Route
+          path="/admin/cupones"
+          element={
+            <RutaProtegida>
+              <GestionCupones />
             </RutaProtegida>
           }
         />
